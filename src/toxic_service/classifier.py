@@ -1,11 +1,13 @@
+from typing import Any
+
 import torch
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
 
 class ToxicClassifier:
     def __init__(self, model_name: str = "unitary/toxic-bert") -> None:
-        self._tokenizer = AutoTokenizer.from_pretrained(model_name)
-        self._model = AutoModelForSequenceClassification.from_pretrained(model_name)
+        self._tokenizer: Any = AutoTokenizer.from_pretrained(model_name)
+        self._model: Any = AutoModelForSequenceClassification.from_pretrained(model_name)
         self._model.eval()
     
     def predict_proba(self, text: str) -> float:
