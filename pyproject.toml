@@ -36,3 +36,8 @@ where = ["src"]
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
+
+[tool.coverage.run]
+omit = [
+    "src/toxic_service/grpc_generated/*",
+]

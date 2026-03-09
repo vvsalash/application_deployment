@@ -1,11 +1,13 @@
-from typing import Annotated
+from typing import Annotated, Protocol
 
 from fastapi import FastAPI, Query
 from pydantic import BaseModel
 from prometheus_client import Counter, generate_latest, CONTENT_TYPE_LATEST
 from starlette.responses import Response
 
-from toxic_service.classifier import ToxicClassifier
+
+class ClassifierProtocol(Protocol):
+    def predict(self, text: str) -> bool: ...
 
 
 class PredictRequest(BaseModel):
@@ -22,7 +24,7 @@ HTTP_INFERENCE_COUNTER = Counter(
 )
 
 
-def create_http_app(classifier: ToxicClassifier) -> FastAPI:
+def create_http_app(classifier: ClassifierProtocol) -> FastAPI:
     app = FastAPI(title="Toxic Text Classifier")
 
     @app.get("/predict", response_model=PredictResponse)
