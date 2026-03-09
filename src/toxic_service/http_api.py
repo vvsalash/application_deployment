@@ -21,6 +21,7 @@ HTTP_INFERENCE_COUNTER = Counter(
     "Number of HTTP inference requests",
 )
 
+
 def create_http_app(classifier: ToxicClassifier) -> FastAPI:
     app = FastAPI(title="Toxic Text Classifier")
 
@@ -28,12 +29,12 @@ def create_http_app(classifier: ToxicClassifier) -> FastAPI:
     def predict_get(text: Annotated[str, Query(...)]) -> PredictResponse:
         HTTP_INFERENCE_COUNTER.inc()
         return PredictResponse(is_toxic=classifier.predict(text))
-    
+
     @app.post("/predict", response_model=PredictResponse)
     def predict_post(payload: PredictRequest) -> PredictResponse:
         HTTP_INFERENCE_COUNTER.inc()
         return PredictResponse(is_toxic=classifier.predict(payload.text))
-    
+
     @app.get("/metrics")
     def metrics() -> Response:
         return Response(generate_latest(), media_type=CONTENT_TYPE_LATEST)
