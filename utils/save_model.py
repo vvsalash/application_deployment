@@ -1,5 +1,5 @@
-from typing import Any
 from pathlib import Path
+from typing import Any, cast
 
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
@@ -8,8 +8,8 @@ SAVE_DIR = Path("/app/model")
 
 SAVE_DIR.mkdir(parents=True, exist_ok=True)
 
-tokenizer: Any = AutoTokenizer.from_pretrained(MODEL_NAME)
-model: Any = AutoModelForSequenceClassification.from_pretrained(MODEL_NAME)
+tokenizer = cast(Any, AutoTokenizer.from_pretrained(MODEL_NAME))
+model = cast(Any, AutoModelForSequenceClassification.from_pretrained(MODEL_NAME))
 
 tokenizer.save_pretrained(SAVE_DIR)
 model.save_pretrained(SAVE_DIR)
