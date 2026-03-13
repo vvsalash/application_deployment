@@ -3,8 +3,8 @@ from typing import Any, Protocol
 
 import grpc
 
-from toxic_service.grpc_generated import inference_pb2
-from toxic_service.grpc_generated import inference_pb2_grpc
+import inference_pb2
+import inference_pb2_grpc
 
 
 class ClassifierProtocol(Protocol):

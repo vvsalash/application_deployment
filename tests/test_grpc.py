@@ -1,5 +1,5 @@
 from toxic_service.grpc_api import TextClassifierServicer, create_grpc_server
-from toxic_service.grpc_generated import inference_pb2
+import inference_pb2
 
 
 class FakeClassifier:

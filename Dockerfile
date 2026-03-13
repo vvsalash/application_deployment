@@ -5,6 +5,8 @@ WORKDIR /app
 RUN pip install --no-cache-dir uv supervisor
 
 COPY pyproject.toml README.md /app/
+COPY inference_pb2.py /app/inference_pb2.py
+COPY inference_pb2_grpc.py /app/inference_pb2_grpc.py
 COPY src /app/src
 COPY proto /app/proto
 COPY utils/save_model.py /app/utils/save_model.py
