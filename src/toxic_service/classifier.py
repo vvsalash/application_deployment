@@ -1,14 +1,16 @@
 from typing import Any
+from pathlib import Path
 
 import torch
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
 
 class ToxicClassifier:
-    def __init__(self, model_name: str = "unitary/toxic-bert") -> None:
-        self._tokenizer: Any = AutoTokenizer.from_pretrained(model_name)
+    def __init__(self, model_dir: str = "/app/model") -> None:
+        model_path = Path(model_dir)
+        self._tokenizer: Any = AutoTokenizer.from_pretrained(model_path)
         self._model: Any = AutoModelForSequenceClassification.from_pretrained(
-            model_name
+            model_path
         )
         self._model.eval()
 
